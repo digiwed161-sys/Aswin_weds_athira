@@ -485,7 +485,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <!-- LANDING — wax-seal envelope, tap anywhere to open -->
-<div id="landing" onclick="openInvite()">
+<div id="landing" onclick="this.classList.add('opening');openInvite()">
   <img class="landing-seal-img" src="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto/1781786927863_r9etym" alt="Aswin &amp; Athira — wedding invitation"/>
   <div class="landing-seal-overlay">
     <div class="landing-dear" id="landingDear" style="display:none">Dear</div>
@@ -1600,7 +1600,11 @@ a{color:inherit;text-decoration:none}
 
 /* LANDING — WAX SEAL ENVELOPE */
 #landing{cursor:pointer;overflow:hidden;padding:0}
-.landing-seal-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.landing-seal-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transform-origin:center;animation:sealIn 1.4s ease both, sealBreathe 9s ease-in-out 1.6s infinite}
+#landing.opening .landing-seal-img{animation:none;transform:scale(1.18);transition:transform 1.1s ease}
+#landing.opening .landing-tap-hint{animation:none;opacity:0;transition:opacity .4s ease}
+@keyframes sealIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
+@keyframes sealBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
 .landing-seal-overlay{position:absolute;left:0;right:0;bottom:16%;z-index:1;text-align:center;padding:0 28px;pointer-events:none}
 .landing-seal-overlay .landing-dear{text-shadow:0 2px 12px rgba(0,0,0,.65)}
 .landing-seal-overlay .landing-guest{margin-bottom:0;text-shadow:0 2px 14px rgba(0,0,0,.75)}
