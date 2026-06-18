@@ -526,11 +526,15 @@ a{color:inherit;text-decoration:none}
     <div class="img-slot-add" onclick="pickImage('hero_photo')" style="display:none"><div class="plus">+</div><span>ADD HERO PHOTO</span></div>
   </div>
   <div class="hero-content">
-    <div class="hero-eyebrow">✦ WITH THE BLESSINGS OF ALMIGHTY GOD ✦</div>
-    <div class="hero-personal" id="heroPersonal"></div>
-    <div class="hero-invite">You are warmly invited to celebrate</div>
-    <div class="hero-names">Aswin<span class="amp">&amp;</span>Athira</div>
-    <div class="hero-date-bar">7 · APRIL · 2027</div>
+    <div class="hero-top">
+      <div class="hero-eyebrow">✦ WITH THE BLESSINGS OF ALMIGHTY GOD ✦</div>
+      <div class="hero-personal" id="heroPersonal"></div>
+      <div class="hero-invite">You are warmly invited to celebrate</div>
+    </div>
+    <div class="hero-bottom">
+      <div class="hero-names">Aswin<span class="amp">&amp;</span>Athira</div>
+      <div class="hero-date-bar">7 · APRIL · 2027</div>
+    </div>
   </div>
 </section>
 
@@ -1645,6 +1649,8 @@ a{color:inherit;text-decoration:none}
 .hero-eyebrow{text-shadow:0 1px 6px rgba(0,0,0,.65)}
 .hero-personal{text-shadow:0 1px 8px rgba(0,0,0,.55)}
 .hero-invite{color:rgba(245,237,224,.92);text-shadow:0 1px 8px rgba(0,0,0,.6)}
+/* HERO layout — blessing + invite at top (above couple's heads), names lower */
+.hero-content{justify-content:space-between;padding-top:62px;padding-bottom:42px}
 .landing-seal-overlay{position:absolute;left:0;right:0;bottom:16%;z-index:1;text-align:center;padding:0 28px;pointer-events:none}
 .landing-seal-overlay .landing-dear{text-shadow:0 2px 12px rgba(0,0,0,.65)}
 .landing-seal-overlay .landing-guest{margin-bottom:0;text-shadow:0 2px 14px rgba(0,0,0,.75)}
