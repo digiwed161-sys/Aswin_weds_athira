@@ -2083,7 +2083,9 @@ function onBgmFileSelected(input){
   fd.append('upload_preset', UPLOAD_PRESET);
   fd.append('folder', COUPLE_FOLDER);
 
-  xhr.open('POST', 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/video/upload');
+  // Use /auto/upload so Cloudinary auto-detects the resource type — more robust
+  // for audio than /video/upload, which some unsigned presets reject.
+  xhr.open('POST', 'https://api.cloudinary.com/v1_1/' + CLOUD_NAME + '/auto/upload');
 
   xhr.upload.onprogress = function(e){
     if(e.lengthComputable && fill){
@@ -2103,11 +2105,11 @@ function onBgmFileSelected(input){
           applyBgmUrl(data.secure_url);
           showToast('BGM UPLOADED ✦');
         } else {
-          bgmUploadError(fill, label, overlay);
+          bgmUploadError(fill, label, overlay, xhr.status, cloudinaryErr(xhr.responseText));
         }
-      } catch(e){ bgmUploadError(fill, label, overlay); }
+      } catch(e){ bgmUploadError(fill, label, overlay, xhr.status); }
     } else {
-      bgmUploadError(fill, label, overlay, xhr.status);
+      bgmUploadError(fill, label, overlay, xhr.status, cloudinaryErr(xhr.responseText));
     }
   };
 
@@ -2115,11 +2117,21 @@ function onBgmFileSelected(input){
   xhr.send(fd);
 }
 
-function bgmUploadError(fill, label, overlay, status){
+// Pull the human-readable error message out of a Cloudinary error response.
+function cloudinaryErr(responseText){
+  try{
+    var d = JSON.parse(responseText);
+    if(d && d.error && d.error.message) return d.error.message;
+  } catch(e){}
+  return '';
+}
+
+function bgmUploadError(fill, label, overlay, status, msg){
+  console.error('BGM upload failed', status || '', msg || '');
   if(fill){ fill.style.width='100%'; fill.style.background='#c0392b'; }
   if(label) label.textContent = 'FAILED' + (status ? ' (' + status + ')' : '') + ' — TAP TO RETRY';
-  setTimeout(function(){ if(overlay) overlay.classList.remove('show'); }, 3000);
-  showToast('BGM UPLOAD FAILED');
+  setTimeout(function(){ if(overlay) overlay.classList.remove('show'); }, 4000);
+  showToast('BGM UPLOAD FAILED' + (msg ? ': ' + msg : (status ? ' (' + status + ')' : '')));
 }
 
 function applyBgmUrl(url){
