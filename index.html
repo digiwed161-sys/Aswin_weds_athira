@@ -484,6 +484,18 @@ a{color:inherit;text-decoration:none}
   </svg>
 </div>
 
+<!-- Fire turbulence filter for the burn-away transition -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="burnTurb" x="-30%" y="-30%" width="160%" height="160%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="3" seed="6" result="t">
+        <animate attributeName="baseFrequency" dur="1.3s" values="0.02 0.03;0.027 0.04;0.017 0.025;0.02 0.03" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="t" scale="55" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
 <!-- LANDING — wax-seal envelope, tap anywhere to open -->
 <div id="landing" onclick="this.classList.add('opening');openInvite()">
   <img class="landing-seal-img" src="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto/1781786927863_r9etym" alt="Aswin &amp; Athira — wedding invitation"/>
@@ -1635,9 +1647,9 @@ a{color:inherit;text-decoration:none}
 @property --burn{syntax:'<percentage>';inherits:false;initial-value:0%}
 #landing.opening{-webkit-mask:radial-gradient(circle at 50% 47%,transparent 0%,transparent var(--burn),rgba(0,0,0,.35) calc(var(--burn) + 6%),#000 calc(var(--burn) + 15%));mask:radial-gradient(circle at 50% 47%,transparent 0%,transparent var(--burn),rgba(0,0,0,.35) calc(var(--burn) + 6%),#000 calc(var(--burn) + 15%));animation:burnAway 1.3s ease-in forwards}
 @keyframes burnAway{from{--burn:0%}to{--burn:145%}}
-#sealBurn{position:fixed;inset:0;z-index:1001;pointer-events:none;opacity:0;transform-origin:50% 47%;mix-blend-mode:screen;background:radial-gradient(circle at 50% 47%,rgba(255,255,245,.95) 0%,rgba(255,186,70,.9) 8%,rgba(255,96,24,.78) 16%,rgba(130,34,0,.42) 27%,transparent 43%)}
-#landing.opening ~ #sealBurn{animation:sealBurnFx 1.3s ease-out forwards}
-@keyframes sealBurnFx{0%{opacity:0;transform:scale(.2)}12%{opacity:1;transform:scale(.5)}60%{opacity:.85;transform:scale(1.6)}100%{opacity:0;transform:scale(2.7)}}
+#sealBurn{position:fixed;inset:0;z-index:1001;pointer-events:none;opacity:0;transform-origin:50% 47%;mix-blend-mode:screen;background:radial-gradient(circle at 50% 47%,rgba(0,0,0,0) 24%,rgba(255,244,200,.95) 29%,rgba(255,165,45,.98) 34%,rgba(232,74,16,.92) 40%,rgba(120,34,6,.7) 46%,rgba(0,0,0,0) 58%);filter:url(#burnTurb)}
+#landing.opening ~ #sealBurn{animation:sealBurnFx 1.4s ease-out forwards}
+@keyframes sealBurnFx{0%{opacity:0;transform:scale(.28)}12%{opacity:1;transform:scale(.55)}70%{opacity:1;transform:scale(1.95)}100%{opacity:0;transform:scale(3)}}
 .landing-seal-overlay{position:absolute;left:0;right:0;bottom:16%;z-index:1;text-align:center;padding:0 28px;pointer-events:none}
 .landing-seal-overlay .landing-dear{text-shadow:0 2px 12px rgba(0,0,0,.65)}
 .landing-seal-overlay .landing-guest{margin-bottom:0;text-shadow:0 2px 14px rgba(0,0,0,.75)}
