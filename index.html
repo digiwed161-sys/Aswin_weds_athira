@@ -1755,15 +1755,16 @@ function openInvite(){
   document.getElementById('landing').classList.add('gone');
   document.getElementById('main').classList.add('show');
   document.body.style.overflow = 'auto';
-  document.getElementById('waBtn').classList.add('show');
-  document.getElementById('bgmBtn').classList.add('show');
   setTimeout(()=>{
     const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.1});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   },100);
   window.addEventListener('scroll',()=>{
-    const b = document.getElementById('mono-badge');
-    if(window.scrollY > 200) b.classList.add('show'); else b.classList.remove('show');
+    document.getElementById('mono-badge').classList.toggle('show', window.scrollY > 200);
+    // WhatsApp + music buttons appear only after scrolling past the hero
+    const pastHero = window.scrollY > window.innerHeight * 0.6;
+    document.getElementById('waBtn').classList.toggle('show', pastHero);
+    document.getElementById('bgmBtn').classList.toggle('show', pastHero);
   },{passive:true});
   checkExistingRsvp();
   loadWishes();
