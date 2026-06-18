@@ -484,19 +484,14 @@ a{color:inherit;text-decoration:none}
   </svg>
 </div>
 
-<!-- LANDING -->
-<div id="landing">
-  <div class="landing-blessing">WITH THE BLESSINGS OF<br>ALMIGHTY GOD</div>
-  <div class="landing-dear" id="landingDear" style="display:none">Dear</div>
-  <div class="landing-guest" id="landingGuest"></div>
-  <div class="landing-names-wrap">
-    <span class="landing-name1">Aswin</span>
-    <span class="landing-amp">&amp;</span>
-    <span class="landing-name2">Athira</span>
+<!-- LANDING — wax-seal envelope, tap anywhere to open -->
+<div id="landing" onclick="openInvite()">
+  <img class="landing-seal-img" src="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto/1781786927863_r9etym" alt="Aswin &amp; Athira — wedding invitation"/>
+  <div class="landing-seal-overlay">
+    <div class="landing-dear" id="landingDear" style="display:none">Dear</div>
+    <div class="landing-guest" id="landingGuest"></div>
   </div>
-  <button class="enter-btn" onclick="openInvite()">
-    OPEN INVITATION &nbsp;↓
-  </button>
+  <div class="landing-tap-hint">TAP TO OPEN</div>
 </div>
 
 <div id="main">
@@ -1602,6 +1597,15 @@ a{color:inherit;text-decoration:none}
 .reply-submit{align-self:flex-end;padding:9px 22px;background:linear-gradient(135deg,#8b1a1a,#6b1010);color:#e8c990;border:none;border-radius:4px;font-family:'Cinzel',serif;letter-spacing:.24em;font-size:8.5px;cursor:pointer;transition:background .2s}
 .reply-submit:hover{background:linear-gradient(135deg,#a52020,#7a1515)}
 .reply-submit:disabled{opacity:.5;cursor:not-allowed}
+
+/* LANDING — WAX SEAL ENVELOPE */
+#landing{cursor:pointer;overflow:hidden;padding:0}
+.landing-seal-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.landing-seal-overlay{position:absolute;left:0;right:0;bottom:16%;z-index:1;text-align:center;padding:0 28px;pointer-events:none}
+.landing-seal-overlay .landing-dear{text-shadow:0 2px 12px rgba(0,0,0,.65)}
+.landing-seal-overlay .landing-guest{margin-bottom:0;text-shadow:0 2px 14px rgba(0,0,0,.75)}
+.landing-tap-hint{position:absolute;left:0;right:0;bottom:6.5%;z-index:1;text-align:center;font-family:'Cinzel',serif;letter-spacing:.42em;font-size:10px;color:#e8d4a8;text-shadow:0 2px 12px rgba(0,0,0,.7);opacity:0;animation:fadeIn .9s ease forwards .8s, tapPulse 2.4s ease-in-out 1.8s infinite;pointer-events:none}
+@keyframes tapPulse{0%,100%{opacity:.5}50%{opacity:.95}}
 </style>
 
 <script>
