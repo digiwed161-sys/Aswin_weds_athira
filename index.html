@@ -487,7 +487,7 @@ a{color:inherit;text-decoration:none}
 <!-- LANDING — wax-seal envelope, tap anywhere to open -->
 <div id="landing" onclick="this.classList.add('opening');openInvite()">
   <img class="landing-seal-img" src="https://res.cloudinary.com/dormnrhdf/image/upload/f_auto,q_auto/1781786927863_r9etym" alt="Aswin &amp; Athira — wedding invitation"/>
-  <div class="landing-shine"></div>
+  <div class="landing-glow"></div>
   <div class="landing-seal-overlay">
     <div class="landing-dear" id="landingDear" style="display:none">Dear</div>
     <div class="landing-guest" id="landingGuest"></div>
@@ -1606,11 +1606,10 @@ a{color:inherit;text-decoration:none}
 #landing.opening .landing-tap-hint{animation:none;opacity:0;transition:opacity .4s ease}
 @keyframes sealIn{from{opacity:0;transform:scale(1.06)}to{opacity:1;transform:scale(1)}}
 @keyframes sealBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
-/* gold shimmer glint — self-focuses on the bright seal via screen blend */
-.landing-shine{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-.landing-shine::before{content:"";position:absolute;top:-30%;left:-65%;width:55%;height:160%;transform:rotate(8deg);filter:blur(7px);mix-blend-mode:screen;background:linear-gradient(105deg,rgba(255,240,205,0) 35%,rgba(255,246,220,.55) 50%,rgba(255,240,205,0) 65%);animation:sealShine 7s ease-in-out infinite 2s}
-@keyframes sealShine{0%{left:-65%;opacity:0}6%{opacity:1}20%{left:120%;opacity:1}26%,100%{left:120%;opacity:0}}
-#landing.opening .landing-shine{display:none}
+/* warm glow on the gold seal — centered radial, gentle pulse */
+.landing-glow{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 50%,rgba(255,226,150,.45) 0%,rgba(255,214,130,.22) 22%,rgba(255,210,120,0) 48%);mix-blend-mode:screen;animation:sealGlow 4.5s ease-in-out infinite}
+@keyframes sealGlow{0%,100%{opacity:.4}50%{opacity:1}}
+#landing.opening .landing-glow{display:none}
 .landing-seal-overlay{position:absolute;left:0;right:0;bottom:16%;z-index:1;text-align:center;padding:0 28px;pointer-events:none}
 .landing-seal-overlay .landing-dear{text-shadow:0 2px 12px rgba(0,0,0,.65)}
 .landing-seal-overlay .landing-guest{margin-bottom:0;text-shadow:0 2px 14px rgba(0,0,0,.75)}
